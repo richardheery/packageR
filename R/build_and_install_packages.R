@@ -59,6 +59,7 @@ build_vignettes = function(package_dir = getwd()){
 install_package_tarball = function(package_tarball){
   system(paste("R CMD INSTALL", package_tarball))
 }
+
 #' Detach and then reload a package
 #' 
 #' @param package A string giving the name of a package
