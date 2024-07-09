@@ -4,10 +4,10 @@
 \alias{bioc_check}
 \title{Run BiocCheck on a package}
 \usage{
-bioc_check(package = getwd(), checkDir)
+bioc_check(package = getwd())
 }
 \arguments{
-\item{package}{Path to either a package source directory or a package tarball. Default is current working directory.}
+\item{package}{Path to either a package source directory or a package tarball. Default is the current working directory.}
 }
 \value{
 An object of class BiocCheck which consists of three lists: error, warning and note.

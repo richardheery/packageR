@@ -21,7 +21,7 @@ r_check = function(package){
 #' @param package Path to either a package source directory or a package tarball. Default is the current working directory.
 #' @return An object of class BiocCheck which consists of three lists: error, warning and note. 
 #' @export
-bioc_check = function(package = getwd(), checkDir){
+bioc_check = function(package = getwd()){
   BiocCheck::BiocCheck(package = package)
 }
 

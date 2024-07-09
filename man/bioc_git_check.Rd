@@ -7,7 +7,7 @@
 bioc_git_check(package_dir = getwd())
 }
 \arguments{
-\item{package}{Path to a package source directory. Default is current working directory.}
+\item{package}{Path to a package source directory. Default is the current working directory.}
 }
 \value{
 An object of class BiocCheck which consists of three lists: error, warning and note.

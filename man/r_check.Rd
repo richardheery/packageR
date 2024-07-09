@@ -7,7 +7,7 @@
 r_check(package)
 }
 \arguments{
-\item{package}{Path to either a package source directory or a package tarball. Default is current working directory.}
+\item{package}{Path to either a package source directory or a package tarball. Default is the current working directory.}
 }
 \value{
 An object of class rcmdcheck.

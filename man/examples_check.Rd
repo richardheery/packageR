@@ -4,10 +4,12 @@
 \alias{examples_check}
 \title{Check examples in a package}
 \usage{
-examples_check(package = getwd())
+examples_check(package = getwd(), start = NULL)
 }
 \arguments{
-\item{package}{Path to either a package source directory or a package tarball. Default is current working directory.}
+\item{package}{Path to either a package source directory or a package tarball. Default is the current working directory.}
+
+\item{start}{Which file to start running examples from. Default is to start from the first file in lexicographical order.}
 }
 \description{
 Check examples in a package

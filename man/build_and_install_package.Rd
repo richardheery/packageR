@@ -9,7 +9,7 @@ build_and_install_package(
   output_directory = NULL,
   install = TRUE,
   build_vignettes = FALSE,
-  increment_version = NULL
+  bump_version = NULL
 )
 }
 \arguments{
@@ -21,12 +21,12 @@ build_and_install_package(
 
 \item{build_vignettes}{A logical value indicating whether or not to build PDF vignettes. Default is FALSE.}
 
-\item{increment_version}{If provided, bumps the package version using usethis::use_version().
+\item{bump_version}{If provided, bumps the package version using usethis::use_version().
 Should be one of "major", "minor", "patch" or "dev".}
 }
 \value{
 Path to the package tarball
 }
 \description{
-Build and then optionally install a package
+First updates documentation for package and then builds it and installs it if specified.
 }

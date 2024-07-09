@@ -2,7 +2,7 @@
 % Please edit documentation in R/package_tests.R
 \name{package_check_pipeline}
 \alias{package_check_pipeline}
-\title{Run package checks on a package tarball}
+\title{Run package checks on a package}
 \usage{
 package_check_pipeline(
   package_dir = getwd(),
@@ -23,6 +23,9 @@ package_check_pipeline(
 
 \item{run_bioc_git_check}{Logical value indicating whether to run BiocCheckGitClone. Default is TRUE.}
 }
+\value{
+An list with the results from the specified checks.
+}
 \description{
-Run package checks on a package tarball
+Run package checks on a package
 }
