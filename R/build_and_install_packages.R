@@ -13,7 +13,7 @@ add_dependencies = function(package_dir = getwd(), install = TRUE){
   
   # Add biocViews: to DESCRIPTION if it is missing
   description = readLines("DESCRIPTION")
-  if(any(!grepl("biocViews:", description))){
+  if(!any(grepl("biocViews:", description))){
     grep("Imports:", description)
     new_description = append(description, "biocViews:", after = grep("Imports:", description)-1)
     writeLines(new_description, "DESCRIPTION")
