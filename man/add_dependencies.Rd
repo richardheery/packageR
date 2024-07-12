@@ -2,18 +2,13 @@
 % Please edit documentation in R/build_and_install_packages.R
 \name{add_dependencies}
 \alias{add_dependencies}
-\title{Get dependencies from a package}
+\title{Add dependencies to DESCRIPTION file of a package and optionally install them if they are not already installed}
 \usage{
-add_dependencies(package_dir = getwd(), install = TRUE)
-}
-\arguments{
-\item{package_dir}{Path to the package source directory. Default is the current directory.}
-
-\item{install}{A logical vector indicating whether to install any missing dependencies. Default is TRUE.}
+add_dependencies()
 }
 \value{
 A vector with the names of dependencies.
 }
 \description{
-Get dependencies from a package
+Add dependencies to DESCRIPTION file of a package and optionally install them if they are not already installed
 }

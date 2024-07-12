@@ -1,15 +1,7 @@
-#' Get dependencies from a package
+#' Add dependencies to DESCRIPTION file of a package and optionally install them if they are not already installed
 #' 
-#' @param package_dir Path to the package source directory. Default is the current directory.
-#' @param install A logical vector indicating whether to install any missing dependencies. Default is TRUE.
 #' @return A vector with the names of dependencies. 
-add_dependencies = function(package_dir = getwd(), install = TRUE){
-  
-  # Save path to current directory and then change into path for package
-  current_dir = getwd()
-  on.exit(setwd(current_dir))
-  setwd(package_dir)
-  setwd(devtools::package_file())
+add_dependencies = function(){
   
   # Add biocViews: to DESCRIPTION if it is missing
   description = readLines("DESCRIPTION")
@@ -25,17 +17,17 @@ add_dependencies = function(package_dir = getwd(), install = TRUE){
   dependencies = setdiff(dependencies, basename(devtools::package_file()))
   
   # Install any missing dependencies if specified
-  if(install){
-    missing_dependencies = setdiff(dependencies, installed.packages())
-    message(paste(length(missing_dependencies), "dependencies missing:", paste(missing_dependencies, collapse = ", ")))
-    message("Installing them now")
-    BiocManager::install(missing_dependencies, update = FALSE)
+  missing_dependencies = setdiff(dependencies, installed.packages())
+  message(paste(length(missing_dependencies), "dependencies missing:", paste(missing_dependencies, collapse = ", ")))
+  if(length(missing_dependencies) > 0){
+    message("Installing missing dependencies")
+    suppressMessages(BiocManager::install(missing_dependencies, update = FALSE))
   }
   
   # Add all dependencies to DESCRIPTION
   lapply(dependencies, function(x) suppressMessages(usethis::use_package(x)))
   
-  # Return the names of added dependencies
+  # Return the names of all dependencies
   return(dependencies)
   
 }
@@ -76,7 +68,7 @@ build_and_install_package = function(package_dir = getwd(), output_directory = N
   if(!is.null(bump_version)){usethis::use_version(which = bump_version)}
   
   # Add dependencies to DESCRIPTION
-  add_dependencies(package_dir = ".", install = T)
+  add_dependencies()
   
   # Update package documentation
   devtools::document(pkg = ".", quiet = TRUE)
@@ -107,7 +99,7 @@ build_vignettes = function(package_dir = getwd()){
 install_package_tarball = function(package_tarball){
   
   # Get repositories used by BiocManager
-  suppressMessages({repos = BiocManager::repositories()})
+  suppressWarnings({repos = BiocManager::repositories()})
   
   # Install package tarball using BiocManager repositories 
   remotes::install_local(package_tarball, upgrade = FALSE, dependencies = TRUE, repos = repos)
