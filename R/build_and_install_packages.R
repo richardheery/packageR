@@ -1,3 +1,22 @@
+#' Add all dependencies for package to DESCRIPTION file
+#' 
+#' @param package_dir Path to the package source directory. Default is the current directory.
+#' @return A vector with the names of dependencies. 
+#' @export
+add_dependencies = function(package_dir = getwd()){
+  
+  # Find all dependencies of package
+  dependencies = system(sprintf("grep -ohrI --include \\*.R --include \\*.Rmd '[[:alnum:]_]\\+::' %s | sort | uniq", package_dir), intern = T)
+  dependencies = gsub("::", "", dependencies)
+  
+  # Add all dependencies to DESCRIPTION
+  lapply(dependencies, usethis::use_package)
+  
+  # Return the names of added dependencies
+  return(dependencies)
+  
+}
+
 #' Build and then optionally install a package
 #' 
 #' First updates documentation for package and then builds it and installs it if specified. 
@@ -32,6 +51,9 @@ build_and_install_package = function(package_dir = getwd(), output_directory = N
   # If bump_version is TRUE, increment version
   if(!is.null(bump_version)){usethis::use_version(which = bump_version)}
   
+  # Add dependencies to DESCRIPTION
+  suppressMessages(add_dependencies())
+  
   # Update package documentation
   devtools::document(pkg = ".", quiet = TRUE)
   
@@ -39,7 +61,7 @@ build_and_install_package = function(package_dir = getwd(), output_directory = N
   package_tarball = devtools::build(pkg = ".", vignettes = build_vignettes, path = output_directory)
   
   # Install the package if specified and return the tarball
-  if(install){install.packages(package_tarball, repos = NULL, type = "source")}
+  if(install){remotes::install_local(package_tarball)}
   return(package_tarball)
   
 }
@@ -57,7 +79,7 @@ build_vignettes = function(package_dir = getwd()){
 #' @param package_tarball Path to a package tarball.
 #' @export
 install_package_tarball = function(package_tarball){
-  system(paste("R CMD INSTALL", package_tarball))
+  remotes::install_local(package_tarball)
 }
 
 #' Detach and then reload a package
