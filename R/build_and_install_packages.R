@@ -34,7 +34,7 @@ add_dependencies = function(){
 
 #' Build and then optionally install a package
 #' 
-#' First updates documentation and adds dependencies to DESCRIPTION and then builds it and finally installs it if specified. 
+#' First updates documentation and adds any missing dependencies to DESCRIPTION and then builds the package and finally installs it if specified. 
 #' 
 #' @param package_dir Path to the package source directory. Default is the current directory. 
 #' @param output_directory Directory in which to save package tarball. Default is the parent directory of the package source directory.
