@@ -105,7 +105,12 @@ build_vignettes = function(package_dir = getwd()){
 #' @param package_tarball Path to a package tarball.
 #' @export
 install_package_tarball = function(package_tarball){
-  remotes::install_local(package_tarball, upgrade = FALSE)
+  
+  # Get repositories used by BiocManager
+  suppressMessages({repos = BiocManager::repositories()})
+  
+  # Install package tarball using BiocManager repositories 
+  remotes::install_local(package_tarball, upgrade = FALSE, dependencies = TRUE, repos = repos)
 }
 
 #' Detach and then reload a package
