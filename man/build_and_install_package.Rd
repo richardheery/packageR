@@ -28,5 +28,5 @@ Should be one of "major", "minor", "patch" or "dev".}
 Path to the package tarball
 }
 \description{
-First updates documentation and adds dependencies to DESCRIPTION and then builds it and finally installs it if specified.
+First updates documentation and adds any missing dependencies to DESCRIPTION and then builds the package and finally installs it if specified.
 }

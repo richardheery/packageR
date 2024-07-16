@@ -6,8 +6,7 @@ add_dependencies = function(){
   # Add biocViews: to DESCRIPTION if it is missing
   description = readLines("DESCRIPTION")
   if(!any(grepl("biocViews:", description))){
-    grep("Imports:", description)
-    new_description = append(description, "biocViews:", after = grep("Imports:", description)-1)
+    new_description = append(description, "biocViews:", after = grep("RoxygenNote:", description))
     writeLines(new_description, "DESCRIPTION")
   }
   
