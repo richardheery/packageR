@@ -15,6 +15,9 @@ Imports:
     BiocCheck,
     BiocManager,
     devtools,
+    doParallel,
+    foreach,
+    parallel,
     rcmdcheck,
     remotes,
     usethis
