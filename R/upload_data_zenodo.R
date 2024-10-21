@@ -4,7 +4,7 @@
 #' @param zenodo_access_token Path to Zenodo access token. Tokens can be created at 
 #' https://zenodo.org/account/settings/applications/tokens/new/ with the "deposit:write" and "deposit:actions" scopes.
 #' @param deposit_id The deposit ID of the upload. This should be the last part of the URL for the deposit.
-#' @return Returns TRUE or FALSE depending on if the file was successfully uploaded.
+#' @return Returns exit status of curl --upload-file
 #' @export
 zenodo_upload = function(file, zenodo_access_token, deposit_id){
   
@@ -35,6 +35,6 @@ zenodo_upload = function(file, zenodo_access_token, deposit_id){
     'bucket=$(curl "https://zenodo.org/api/deposit/depositions/${deposit_number}?access_token=$token" | grep -o "bucket[^,]*" | grep -o "https:[^\\"]*");',
     'curl --upload-file "${filepath}" "${bucket}/${filepath}?access_token=${token}"')
   system(cmd)
-  
+  return(cmd)
     
 }
